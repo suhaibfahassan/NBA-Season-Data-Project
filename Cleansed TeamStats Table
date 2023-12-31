@@ -1,0 +1,28 @@
+-- Cleansed TeamStats Table --
+SELECT
+       Team
+      ,G AS Games_Played
+      ,MP AS Minutes_Played
+      ,FG AS Field_Goal_Makes
+      ,FGA AS Field_Goal_Attempted
+      ,FG1 AS Field_Goal_Percentage
+      ,_3P AS Three_Point_Makes
+      ,_3PA AS Three_Point_Attempts
+      ,_3P1 AS Three_Point_Percentage
+      ,_2P AS Two_Point_Makes
+      ,_2PA AS Two_Point_Attempts
+      ,_2P1 AS Two_Point_Percentage
+      ,FT AS FreeThrows_Made
+      ,FTA AS FreeThrows_Attempted
+      ,FT1 AS FreeThrows_Percentage
+      ,ORB AS Offensive_Rebound
+      ,DRB AS Defensive_Rebound
+      ,TRB AS Total_Rebound
+      ,AST AS Assists_Per_Game
+      ,STL AS Steals_Per_Game
+      ,BLK AS Blocks_Per_Game
+      ,TOV AS Turnovers_Per_Game
+      ,PF AS Fouls_Per_Game
+      ,PTS AS Points_Per_Game
+  FROM 
+	NBAstats.dbo.TeamStats
