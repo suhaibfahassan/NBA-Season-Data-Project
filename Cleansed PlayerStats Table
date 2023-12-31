@@ -1,0 +1,46 @@
+-- Cleansed PlayerStats Table --
+WITH Simple_Player
+AS (
+	SELECT sa.Player
+	  ,Pos
+	  ,sa.Tm AS Team
+	  ,Age
+	  ,_2023_24 AS _2023_24_Salary
+      ,ISNULL(_2024_25, '$0') AS _2024_25_Salary
+      ,G AS Game
+      ,GS AS Games_Started
+      ,MP AS Minutes_Played
+      ,FG AS Field_Goal_Makes
+      ,FGA AS Field_Goal_Attempted
+      ,FG1 AS Field_Goal_Percentage
+      ,_3P AS Three_Point_Makes
+      ,_3PA AS Three_Point_Attempts
+      ,_3P1 AS Three_Point_Percentage
+      ,_2P AS Two_Point_Makes
+      ,_2PA AS Two_Point_Attempts
+      ,_2P1 AS Two_Point_Percentage
+      ,eFG AS Efficient_Field_Goal_Percentage
+      ,FT AS FreeThrows_Made
+      ,FTA AS FreeThrows_Attempted
+      ,FT1 AS FreeThrows_Percentage
+      ,ORB AS Offensive_Rebound
+      ,DRB AS Defensive_Rebound
+      ,TRB AS Total_Rebound
+      ,AST AS Assists_Per_Game
+      ,STL AS Steals_Per_Game
+      ,BLK AS Blocks_Per_Game
+      ,TOV AS Turnovers_Per_Game
+      ,PF AS Fouls_Per_Game
+      ,PTS AS Points_Per_Game
+      ,Player_additional AS PlayerID
+	,row_number()
+OVER (partition by sa.Player ORDER BY sa.Player) AS UNQ
+	FROM NBAstats.dbo.PlayerStats AS st
+LEFT JOIN NBAstats.dbo.PlayerSalaries AS sa ON sa.PlayerAdditional = st.Player_additional
+WHERE sa.Player is not null
+)
+
+SELECT *
+FROM Simple_Player
+WHERE UNQ = 1
+ORDER BY Player
