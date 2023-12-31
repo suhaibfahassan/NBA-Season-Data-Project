@@ -1,0 +1,15 @@
+-- Cleansed PlayerSalaries Table --
+SELECT 
+       sa.Player
+      ,sa.Tm AS Team
+      ,_2023_24 AS _2023_24_Salary
+      ,ISNULL(_2024_25, '$0') AS _2024_25_Salary
+      ,ISNULL(_2025_26, '$0') AS _2025_26_Salary
+      ,ISNULL(_2026_27, '$0') AS _2026_27_Salary
+      ,ISNULL(_2027_28, '$0') AS _2027_28_Salary
+      ,ISNULL(_2028_29, '$0') AS _2028_29_Salary
+      ,ISNULL(Guaranteed, '$0') AS Guaranteed_Salary
+      ,PlayerAdditional AS PlayerID
+FROM
+	NBAstats.dbo.PlayerSalaries AS sa
+LEFT JOIN NBAstats.dbo.PlayerStats AS st ON sa.PlayerAdditional = st.Player_additional
